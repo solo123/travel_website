@@ -1,0 +1,150 @@
+blockquote,q
+{
+	quotes: none;
+}
+blockquote:before,blockquote:after,q:before,q:after
+{
+	content: '';
+	content: none;
+}
+
+form.credit-card {
+  line-height: 32px;
+  -webkit-box-shadow:0 1px 3px #bbb;
+  -moz-box-shadow:0 1px 3px #bbb;
+  box-shadow:0 1px 3px #bbb;
+  background:linear-gradient(#fff,#f5f5f5);
+  background-color:#f8f8f8;
+  border:5px solid #fff;
+  width:287px;
+  margin:0 auto 32px;
+  padding:12px 24px 24px;
+
+  h2 {
+    color:#555;
+    font-family:"Helvetica Neue",Verdana,Geneva,Arial,Helvetica,sans-serif;
+    font-size:16px;
+    font-style:normal;
+    margin-bottom:0;
+  }
+
+  & > ul > li {
+    margin:8px 0;
+  }
+
+  label {
+    color:#555;
+    display:block;
+    font-size:14px;
+    small {
+      color:#aaa;
+      font-size:11px;
+      line-height:11px;
+      text-transform:uppercase;
+    }
+  }
+
+
+  input[type='text'] {
+    -webkit-box-shadow:inset 0 1px 3px -1px #aaa;
+    -moz-box-shadow:inset 0 1px 3px -1px #aaa;
+    box-shadow:inset 0 1px 3px -1px #aaa;
+    border:1px solid #aaa;
+    color:#333;
+    display:block;
+    font-size:18px;
+    height:30px;
+    -moz-box-sizing:content-box;
+    border-color:#aaa #ddd #ddd #aaa;
+    padding:0 5px;
+  }
+  input[readonly='readonly'] { border:none;}
+  input.full-width {width:275px;}
+  input[type='submit']{
+    font-size:18px;
+    height:30px;
+    margin-top: 10px;
+  }
+
+  input.valid {
+    background:url(<%= asset_path("tick.png") %>) 260px center no-repeat;
+  }
+}
+
+.vertical {
+  overflow: hidden;
+  li {
+    float:left;
+    width:90px;
+    .or {
+      color:#aaa;
+      float:left;
+      font-size:12px;
+      margin-left:-8px;
+      margin-top:32px;
+    }
+}
+  li.expiry-date {width: 140px;}
+
+  li:last-child {
+    float:right;
+    text-align:right;
+    input {
+      float:right;
+    }
+  }
+
+  input {
+    width:68px;
+  }
+}
+
+.cards {
+  overflow:hidden;
+  li {
+    -webkit-transition:all .2s;
+    -moz-transition:all .2s;
+    -ms-transition:all .2s;
+    -o-transition:all .2s;
+    transition:all .2s;
+    background-image:url(<%= asset_path("card_logos.png") %>);
+    background-position:0 0;
+    float:left;
+    height:32px;
+    margin-right:8px;
+    text-indent:-9999px;
+    width:51px;
+  }
+  li:last-child {
+    margin-right:0;
+  }
+  .visa_electron {
+    background-position:204px 0;
+  }
+  .mastercard {
+    background-position:153px 0;
+  }
+  .maestro {
+    background-position:102px 0;
+  }
+  .discover {
+    background-position:51px 0;
+  }
+
+  .visa.off {
+    background-position:0 32px;
+  }
+  .visa_electron.off {
+    background-position:204px 32px;
+  }
+  .mastercard.off {
+    background-position:153px 32px;
+  }
+  .maestro.off {
+    background-position:102px 32px;
+  }
+  .discover.off {
+    background-position:51px 32px;
+  }
+}
+

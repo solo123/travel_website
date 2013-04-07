@@ -1,0 +1,22 @@
+<% if flash[:error] %>
+  alert("<%= flash[:error] %>");
+  <% flash.discard %>
+<% else %>
+var order_div_id = "order_div";
+var order_div = '#order_div';
+if ($(order_div).length == 0){
+  $('.main-content').append("<div id='"+ order_div_id +"'></div>");
+  $(order_div).dialog({ autoOpen:false, width:700, dialogClass:'shadow', modal:true});
+}
+
+$(order_div)
+	.html("<%= j render 'form_order' %>")
+	.dialog('option', 'title', '* New Order *')
+	.dialog('open');
+
+$('input[type=submit]').addClass('button green');
+$('.date-picker').datepicker({ showButtonPanel: true, dateFormat: 'yy-mm-dd' });
+
+tour_price = [ <%= @schedule.price.price1 %>, <%= @schedule.price.price2 %>, <%= @schedule.price.price3 %>, <%= @schedule.price.price4 %>];
+recaculate_price();
+<% end %>

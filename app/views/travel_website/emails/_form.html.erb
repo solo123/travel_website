@@ -1,0 +1,10 @@
+<%= form_for( @object, :remote => true) do |f| %>
+<div class='container'>
+  <div class='span-4'><%= f.email_field :email_address %></div>
+</div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+

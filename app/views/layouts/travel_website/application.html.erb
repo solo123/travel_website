@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+		<title><%= title %></title>
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />  	
+	<%= stylesheet_link_tag    "store/all", :media => "all" %>
+	<%= javascript_include_tag "store/all" %>
+  <link rel="stylesheet" href="/css/jqueryui/ui.css" type="text/css" media="screen, projection">
+	<%= csrf_meta_tags %>
+	<%= yield :head %>
+  </head>
+  <body>
+
+    <div class='header-wrapper'>
+      <div class='header'>
+        <div class='advertisement'>
+          <%= render 'travel_website/shared/ad_top_banner' %>
+        </div>
+        <div class='aetravel-logo'>
+          <a href="/">
+            <%= image_tag '/pics/logo_w.png', :alt => ''  %>
+          </a>
+        </div>
+        <div class='login-status'>
+          <%= render 'travel_website/shared/login_bar' %>
+        </div>
+      </div>
+    </div>
+
+    <div class='site-nav-wrapper'>
+      <%= render 'travel_website/shared/site_menu' %>
+    </div>
+
+    <%#= breadcrumbs(@taxon) %>
+    <div class='main-content clear'>
+      <%= flash_messages %>
+      <%= yield %>
+    </div>
+
+    <%= render 'travel_website/shared/footer' %>
+  </body>
+</html>

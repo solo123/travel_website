@@ -1,0 +1,80 @@
+<% content_for :head do %>
+<%= javascript_tag do %>
+var vds = '<%= @datelist %>';
+$(function(){
+  $('#departure').datepicker({
+    numberOfMonths: 2,
+    showButtonPanel: false,
+    minDate: 0,
+    maxDate: <%= @max_date %>,
+    onSelect: function(dateText, inst){
+      $('#departure_date').val(dateText);
+    },
+    beforeShowDay: function(date){
+      var s = date_to_string(date);
+      if (vds.indexOf(s)<0)
+        return [0, '', null];
+      else
+        return [1, '', s];  
+    }
+  });
+  set_current_menu('menu_<%= @tour.tour_type_menu_id %>');
+  $('.dialog-normal').dialog({
+    autoOpen: false, show: "fade", hide: "blind", 
+    width: 700, height: 300
+  });
+});
+<% end %>
+<% end %>
+<div class='crumb'>
+<a href='/'>Home</a> > <a href='/tours'>Tours</a> > <a href='/tours/<%= @tour.tour_type_menu_id %>'><%= @tour.tour_type_name %></a> > <%= @tour.description.title %>
+</div>
+
+<div class="main_lightGreen" style="padding:20px;">
+
+    <div id="tour_detail">
+        <div class="head">
+            <h2><%=h @tour.description.title %></h2>
+        </div>
+        <%=raw @tour.description.en if @tour.description %>
+    </div>
+  <div id="order">
+    Departure Date<br />
+    <div id='departure'></div>
+    <% if @tour.tour_price %>
+      <p>Price: <b>$<%= @tour.tour_price.price_adult %></b></p>
+    <% end %>
+    <br />
+    <%= form_tag order_tour_path(@tour), :method => :post, :remote => true do %>
+      <%= hidden_field_tag :tour_id, @tour.id %>
+      <%= hidden_field_tag :departure_date %>
+      <%= submit_tag 'Order Now', :class => 'color-button' %>
+    <% end %>
+  </div>
+  <div class="clear"></div>
+    <div id="tour_dests">
+        <%
+        cd = 0
+        image_path = ''
+        @tour.spots.each do |spot|
+        if (spot.visit_day != cd)
+            cd = spot.visit_day %>
+            <div class="day">Day <%= cd %></div>
+     <% end %>
+
+        <div class='dest'>
+          <div class="pic">
+          	<%= image_tag spot.destination.title_photo.pic(:small) if spot.destination.title_photo %>
+          </div>
+          <div class="tour-info">
+              <%= link_to spot.destination.description.title, destination_path(spot.destination) %>
+              <%=raw spot.description.en if spot.description %>
+          </div>
+          <div class="clear"></div>
+        </div>
+
+    <% end %>
+    <div class="clear"></div>
+    </div>
+</div>
+

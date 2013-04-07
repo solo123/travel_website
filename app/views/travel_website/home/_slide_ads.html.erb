@@ -1,0 +1,25 @@
+<div id="slides">
+  <div class="slides_container">
+    <% if page = Page.find_by_permalink('page.home.advertising.photos') 
+      links = page.description.en.scan /<p>([^<>]*)<\/p>/
+      idx = 0
+    %>
+    <% page.photos.each do |photo| 
+      txt = lnk = ''
+      if idx < links.length - 1
+        txt = links[idx][0]
+        lnk = links[idx + 1][0]
+      end
+      idx += 2
+  %>
+    <div>
+      <a href='<%= lnk %>'>
+        <%= image_tag photo.pic.url(:original), :width => '400' %>
+      </a>
+      <h2><%= txt %></h2>
+    </div>
+  <% end %>
+<% end %>
+  </div>
+</div>
+

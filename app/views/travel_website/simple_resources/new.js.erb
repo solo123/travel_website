@@ -1,0 +1,14 @@
+var edit_div_id = "edit_<%= @object.class.name.underscore %>_div";
+var edit_div = '#' + edit_div_id;
+if ($(edit_div).length == 0){
+  $('.main-content').append("<div id='"+ edit_div_id +"'></div>");
+  $(edit_div).dialog({ autoOpen:false, width:700, dialogClass:'shadow', modal:true});
+}
+
+$(edit_div)
+	.html("<%= j render 'form' %>")
+	.dialog('option', 'title', '* New <%= @object.class.name %> *')
+	.dialog('open');
+
+$('input[type=submit]').addClass('button green');
+$('.date-picker').datepicker({ showButtonPanel: true, dateFormat: 'yy-mm-dd' });

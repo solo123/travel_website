@@ -1,0 +1,46 @@
+    <div class='site-nav-wrapper'>
+      <ul class='footer white-text'>
+        <li class='col1'>&nbsp;</li>
+        <li><a href='/destinations'>destinations</a></li>
+        <li><a href='/tours'>tours</a></li>
+        <li><a href='/pages/about-us'>about us</a></li>
+      </ul>
+      <div class='clear'></div>
+    </div>
+    <div class="footer-wrapper">
+      <div class="footer" style='margin-top:10px;margin-bottom:10px;'>
+        <div style='float:left; width:400px;'>
+          <!-- siteseal -->
+        </div>
+        <div style='float:left; width:400px; font-size: 11px;'>
+          <%= render 'travel_website/shared/cms_page', :cms_title => 'page.footer.address' %>
+        </div>
+        <div class='clear'></div>
+      </div>
+    </div>
+    <div class='copyright-wrapper'>
+      <div class='footer white-text'>
+        <div style='float:left; padding-top:10px; padding-bottom:10px;'>
+          <a href="/">
+            <%= image_tag '/pics/logo.png', :height => '30', :alt => ''  %>
+          </a> 
+        </div>
+        <div style='float:right;margin-top:25px;'><%= cfg.get_config(:copyright) %><a href="/pages/terms.aspx">Terms &amp; Conditions</a></div>
+        <ul id='color_schemas'>
+          <li class='color1'></li>
+          <li class='color2'></li>
+          <li class='color3'></li>
+          <li class='color4'></li>
+          <li class='color5'></li>
+          <li class='color6'></li>
+        </ul>
+        <div class='clear'></div>
+        <%= image_tag 'store/home/creditcard.gif' %>
+      </div>
+    </div>
+
+<div id="footer">
+
+  
+</div>   
+<%= render 'travel_website/shared/google_analytics' %>

@@ -1,0 +1,31 @@
+<h2><%= @tour.description.title %></h2>
+<p>Departure: <%= @schedule.departure_date %></p>
+
+<p>Price: <%= @tour.tour_price.price_adult %>, Single charge: <%= @tour.tour_price.single_charge %>, 4th person charge: <%= @tour.tour_price.forth_charge %>
+</p>
+<hr />
+<%= form_tag '/orders' do %>
+  <div style='min-height:200px;'>
+    <%= hidden_field_tag :schedule_id, @schedule.id %>
+  <table id='room_table'>
+    <tr>
+      <td>Room</td>
+      <td>&nbsp;&nbsp;PAX:</td>
+      <td><%= select_tag 'num_adult[]', '<option>1</option><option>2</option><option>3</option><option>4</option>'.html_safe, :onchange => 'recaculate_price()' %></td>
+      <td>&nbsp;&nbsp;Amount:</td>
+      <td class='amount'></td>
+    </tr>
+  </table><hr />
+  <table>
+    <tr>
+      <td width='214'><b>Total:</b></td>
+      <td width='100' id='total_amount'></td>
+    </tr>
+  </table>
+</div>
+  <%= link_to 'add room', 'javascript:add_room();' %>
+  <p>
+    <%= submit_tag 'New Order' %>
+  </p>
+  <% end %>
+
