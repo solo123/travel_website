@@ -1,7 +1,6 @@
 module TravelWebsite
-  class AccountsController < ApplicationController
+  class MyaccountsController < ApplicationController
     before_filter :authenticate_user!
-
     def show
       u = current_user
       unless u.user_info
@@ -19,3 +18,4 @@ module TravelWebsite
     end
   end
 end
+

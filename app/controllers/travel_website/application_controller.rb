@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 	before_filter :set_locale
 	helper_method :title
 	helper_method 'title='
+	helper 'travel_website/application'
 
   # can be used in views as well as controllers.
   # e.g. <% title = 'This is a custom title for this view' %>

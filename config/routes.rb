@@ -3,6 +3,7 @@ TravelWebsite::Engine.routes.draw do
   
   match 'home(/:action)' => 'home'
   resource :account
+  resource :myaccount
   resources :telephones, :emails, :addresses
   resources :destinations, :pages, :tour_orders
   resources :tours do

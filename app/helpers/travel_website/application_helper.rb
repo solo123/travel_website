@@ -1,19 +1,19 @@
 module TravelWebsite
-module ApplicationHelper
-  def flash_messages
-	  [:notice, :alert, :error].map do |msg_type|
-	    if flash[msg_type]
-	      content_tag :div, flash[msg_type], :class => "flash #{msg_type}"
-	    else
-	      ''
-	    end
-	  end.join("\n").html_safe
-  end
-  def cfg
-    AppConfig.instance
-  end
-  def title
-  end
+  module ApplicationHelper
+    def flash_messages
+      [:notice, :alert, :error].map do |msg_type|
+        if flash[msg_type]
+          content_tag :div, flash[msg_type], :class => "flash #{msg_type}"
+        else
+          ''
+        end
+      end.join("\n").html_safe
+    end
+    def cfg
+      AppConfig.instance
+    end
+    def title
+    end
     def add_object_js_link(name, form, method, partial, where)
       link_to_function name, %{
 var new_object_id = new Date().getTime(); 
@@ -41,5 +41,5 @@ var html = $("#{generate_template(form, method, :partial => partial)}".replace(/
       end
       title
     end
-end
+  end
 end
