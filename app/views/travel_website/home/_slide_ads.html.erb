@@ -11,15 +11,15 @@
         lnk = links[idx + 1][0]
       end
       idx += 2
-  %>
+    %>
     <div>
       <a href='<%= lnk %>'>
-        <%= image_tag photo.pic.url(:original), :width => '400' %>
+        <%= image_tag photo.pic.url(:large), :width => '400' %>
       </a>
       <h2><%= txt %></h2>
     </div>
   <% end %>
-<% end %>
+  <% end %>
   </div>
 </div>
 
