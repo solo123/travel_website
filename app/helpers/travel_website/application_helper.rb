@@ -1,3 +1,4 @@
+#encoding: utf-8
 module TravelWebsite
   module ApplicationHelper
     def flash_messages
@@ -33,11 +34,19 @@ var html = $("#{generate_template(form, method, :partial => partial)}".replace(/
       escape_javascript generate_html(form_builder, method, options)
     end
     def tour_full_name(tour)
-      title = tour.description.title
+      title = tour.description.local_title(locale)
       if tour.days == 1
-        title += ' 1Day tour'
+        if locale == :zh
+          title += '1日游'
+        else
+          title += ' 1Day tour'
+        end
       else
-        title += " #{tour.days} Days #{tour.days - 1} Nights"
+        if locale == :zh
+           title += "#{tour.days}天#{tour.days - 1}夜"
+        else
+           title += " #{tour.days} Days #{tour.days - 1} Nights"
+        end
       end
       title
     end

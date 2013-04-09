@@ -9,7 +9,7 @@ class PasswordsController < Devise::PasswordsController
       a_email = resource_params[:email]
       if a_email
         em = Email.where(:email_data_type => 'UserInfo').where(:email_address => a_email).first
-        ui = em.email_data
+        ui = em.email_data if em
         if ui
           unless ui.user
             u = User.new(:email => a_email)
@@ -26,7 +26,6 @@ class PasswordsController < Devise::PasswordsController
       end
       respond_with(resource)
     end
-    
   end
 end
 end

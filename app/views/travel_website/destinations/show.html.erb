@@ -11,26 +11,28 @@
   </style>
 <% end %>
 <% content_for :breadcrumbs do %>
+  <ul>
       <li><a href="/home/index">Home</a></li>
       <li>&raquo;</li>
       <li><a href="/destinations">Destinations</a></li>
       <li>&raquo;</li>
       <li><%= @destination.description.title %></li>
+    </ul>
     <% end %>
 
     <%= render 'related_tours' %>
-    <h2><%= @destination.description.title %></h2>
+    <h2><%= @destination.description.local_title(locale) %></h2>
     <div id="photo_dest">
       <div id="photo_primary" style="margin-right:16px;padding:3px;float:left;">
       <%= image_tag @destination.title_photo.pic.url(:small) if @destination.title_photo %>
       </div>
       <div style="font-size:1em;line-height: 1.62;margin-bottom:12px;">
-        <%=raw @destination.description.en %>
+        <%=raw @destination.description.local_description(locale) %>
       </div>
       <div class="clear"></div>
     </div>
 
-    <h2>Photo Gallery</h2>
+    <h2><%= t 'photo_gallery' %></h2>
     <div id="gallery">
       <% @destination.photos.each do |p| %>
         <a href="<%= p.pic.url(:large) %>"><img src="<%= p.pic.url(:thumb) %>" data-title="First" data-description="First image" /></a>

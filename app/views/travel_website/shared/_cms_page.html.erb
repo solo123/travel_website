@@ -1,11 +1,13 @@
 <% cms = Page.find_by_permalink(cms_title)
-	if !cms
+	if !cms 
 		cms = Page.new
 		cms.permalink = cms_title
 		cms.save
 	end
 -%>
+<% if cms.status > 0 %>
 <% if cms.title && cms.title.length > 2 %>
 <h2><%= cms.title %></h2>
 <% end %>
 <%= raw  cms.description.en if cms.description %>
+<% end %>

@@ -10,12 +10,12 @@
 <ul id="dest_list">
   <% @destinations.each do |d| %>
     <% if d.description %>
-    <li title="<%=h d.description.title%>">
+    <li>
     <a href='<%= destination_path(d) %>'>
       <div class='img-case'>
         <%= image_tag d.title_photo.pic.url(:thumb) if d.title_photo %>
       </div>
-      <%= d.description.title %>
+      <%= d.description.local_title(locale) %>
     </a>
   </li>
 <% end %>

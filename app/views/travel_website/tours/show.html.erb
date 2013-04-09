@@ -26,17 +26,25 @@ $(function(){
 });
 <% end %>
 <% end %>
-<div class='crumb'>
-<a href='/'>Home</a> > <a href='/tours'>Tours</a> > <a href='/tours/<%= @tour.tour_type_menu_id %>'><%= @tour.tour_type_name %></a> > <%= @tour.description.title %>
-</div>
+<%= content_for :breadcrumbs do %>
+  <ul>
+    <li><a href='/'>Home</a></li>
+      <li>&raquo;</li>
+      <li><a href='/tours'>Tours</a></li>
+      <li>&raquo;</li>
+      <li><%= link_to @tour.tour_type_name, "/tours/#{@tour.tour_type_menu_id}" %></li>
+      <li>&raquo;</li>
+      <li><%= @tour.description.title %></li>
+    </ul>
+<% end %>
 
-<div class="main_lightGreen" style="padding:20px;">
+<div class="main_lightGreen" >
 
     <div id="tour_detail">
         <div class="head">
-            <h2><%=h @tour.description.title %></h2>
+            <h2><%=h @tour.description.local_title(locale) %></h2>
         </div>
-        <%=raw @tour.description.en if @tour.description %>
+        <%=raw @tour.description.local_description(locale) %>
     </div>
   <div id="order">
     Departure Date<br />
@@ -63,13 +71,15 @@ $(function(){
      <% end %>
 
         <div class='dest'>
+          <% if spot.destination %>
           <div class="pic">
           	<%= image_tag spot.destination.title_photo.pic(:small) if spot.destination.title_photo %>
           </div>
           <div class="tour-info">
-              <%= link_to spot.destination.description.title, destination_path(spot.destination) %>
-              <%=raw spot.description.en if spot.description %>
+              <%= link_to spot.destination.description.local_title(locale), destination_path(spot.destination) %>
+              <%=raw spot.description.local_description(locale) if spot.description %>
           </div>
+          <% end %>
           <div class="clear"></div>
         </div>
 

@@ -15,4 +15,4 @@
   <%= link_to t(:sign_up), '/users/sign_up' %>
 <% end %>
 
-  <%= link_to( t('.lang'), "#{t(:switch_host)}#{request.path}", :class => 'lang') %>
+<%= link_to( t('.lang'), "javascript:change_language('#{locale}');", :class => 'lang') %>

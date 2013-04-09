@@ -1,17 +1,16 @@
-<%
-  day = 0 %>
+<% day = 0 %>
 <div class="tours">
   <% @tours.each do |t| %>
   <% if t.days > day
     day = t.days
-    tit = "#{day} days tour"
+    tit = "days_tour"
     if day > 3
-      tit = "4 and more days tour"
+      tit = "more_days_tour"
       day = 10000
     end
   %>
   <div class="clear"></div>
-  <h2>-- <%= tit %> --</h2>
+  <h2>-- <%= t tit, :count => day %> --</h2>
   <% end %>
   <div class="tour">
     <div class='tour-icon'>
@@ -20,10 +19,10 @@
     <div class='tour-info'>
       <div class="tour-name">
         <a href='/tours/<%=  t.id %>'>
-                <%=t.description.title %> <%= t.days %>
+                <%= tour_full_name(t) %>
             </a>
       </div>
-      <div class="price">Price: $<%=t.tour_price.price_adult if t.tour_price%></div>
+      <div class="price"><%= t 'price' %> $<%=t.tour_price.price_adult if t.tour_price%></div>
     </div>
   </div>
   <% end %>

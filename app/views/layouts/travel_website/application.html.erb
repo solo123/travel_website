@@ -31,8 +31,10 @@
       <%= render 'travel_website/shared/site_menu' %>
     </div>
 
-    <%#= breadcrumbs(@taxon) %>
     <div class='main-content clear'>
+      <div class='breadcrumbs'><%= yield :breadcrumbs %>
+        <div class='clear'></div>
+      </div>
       <%= flash_messages %>
       <%= yield %>
     </div>
