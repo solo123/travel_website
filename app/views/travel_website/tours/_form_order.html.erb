@@ -1,7 +1,16 @@
+<div class='order'>
 <h2><%= @tour.description.title %></h2>
-<p>Departure: <%= @schedule.departure_date %></p>
+<p class='info-text'>
+  Departure: <%= label_tag @schedule.departure_date %>
+  Return: <%= label_tag @schedule.return_date %>
+</p>
 
-<p>Price: <%= @tour.tour_price.price_adult %>, Single charge: <%= @tour.tour_price.single_charge %>, 4th person charge: <%= @tour.tour_price.forth_charge %>
+<p class='info-text'>
+  Price: <%= label_tag @tour.tour_price.price_adult %>
+  <% if @tour.tour_price.buy_two_get_one_free == 1 %>
+    (Single charge: <%= label_tag @tour.tour_price.single_charge %>, 
+    4th person charge: <%= label_tag @tour.tour_price.forth_charge %>)
+  <% end %>
 </p>
 <hr />
 <%= form_tag '/orders' do %>
@@ -18,14 +27,14 @@
   </table><hr />
   <table>
     <tr>
-      <td width='214'><b>Total:</b></td>
+      <td width='100'><%= link_to 'add room', 'javascript:add_room();', :class => 'button green small' %></td>
+      <td width='114' align='right'><b>Total:</b></td>
       <td width='100' id='total_amount'></td>
     </tr>
   </table>
 </div>
-  <%= link_to 'add room', 'javascript:add_room();' %>
   <p>
     <%= submit_tag 'New Order' %>
   </p>
   <% end %>
-
+</div>

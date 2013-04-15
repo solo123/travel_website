@@ -1,6 +1,6 @@
 <h2>Order</h2>
 <% order = @object %>
-<table class='order-table'>
+<table class='order-table order'>
         <tr class='order-head'>
           <td colspan='4'>Order# <b><%= order.order_number %></b> Created at: <%= order.created_at %></td>
         </tr>
@@ -9,30 +9,30 @@
       <% else %>
         <tr>
           <td class='thumb'><%= image_tag order.schedule.tour.title_photo.pic.url(:thumb) if order.schedule.tour.title_photo %></td>
-          <td class='tour-info'>
+          <td class='info-text'>
             <h2><%= tour_full_name(order.schedule.tour) %></h2>
-            Departure: <%= order.schedule.departure_date %>
-            Reture: <%= order.schedule.return_date %>
+            Departure: <%= label_tag order.schedule.departure_date %>
+            Reture: <%= label_tag order.schedule.return_date %>
             <p>
               <table>
                 <% order.order_items.each_with_index do |item, idx| %>
                   <tr>
-                    <td>Room <%= idx %></td>
-                    <td><%= item.num_total %>PAX</td>
-                    <td>amount: <%= item.amount %></td>
+                    <td>Room <%= idx + 1 %></td>
+                    <td align='center'><%= item.num_total %>PAX</td>
+                    <td align='right'>amount: <%= item.amount %></td>
                   <% end %>
-                  <tr>
-                    <td>Total room: <%= order.order_price.num_rooms %></td>
-                    <td><%= order.order_price.num_total %>PAX</td>
-                    <td><%= order.order_price.total_amount %></td>
+                  <tr class='order-head'>
+                    <td><b>Total</b></td>
+                    <td align='center'><%= order.order_price.num_total %>PAX (<%= order.order_price.num_rooms %> room)</td>
+                    <td align='right'><%= order.order_price.total_amount %></td>
                   </tr>
                   <tr>
-                    <td colspan='2'>additional</td>
-                    <td><%= order.order_price.adjustment_amount %></td>
+                    <td colspan='2'>Additional</td>
+                    <td align='right'><%= order.order_price.adjustment_amount %></td>
                   </tr>
-                  <tr>
+                  <tr class='order-head'>
                     <td colspan='2'>Actual amount:</td>
-                    <td><%= order.order_price.actual_amount %></td>
+                    <td align='right'><%= label_tag order.order_price.actual_amount %></td>
                   </tr>
 
               </table>
@@ -42,10 +42,10 @@
             <div class='price'><%= order.order_price.actual_amount %> (<%= order.status %>)</div>
             <div class='op'>
               <% if order.status == 0 %>
-                <%= link_to 'Pay', payment_order_path(order) %> |
+                <%= link_to 'Pay', payment_order_path(order), :class => 'button orange small' %> |
               <% end %>
               <% if order.status && order.status < 2 %>
-                <%= link_to 'Cancel', order_path(order), :method => :delete, :confirm => "Order incorrect? You can cancel this order before the order confirmed.\n\nAre you sure to continue ?" %>
+                <%= link_to 'Cancel', order_path(order), :method => :delete, :confirm => "Order incorrect? You can cancel this order before the order confirmed.\n\nAre you sure to continue ?", :class => 'button green small' %>
               <% end %>
             </div>
             <br />
@@ -55,7 +55,7 @@
                 <%= pcc.card_type %> <%= link_to pcc.card_number, pay_credit_card_path(pcc) %><br />
               <% end %>
             <% end %>
-            <div class='notes'>balance: <%= order.order_price.balance_amount %></div>
+            <div class='notes'>Balance: <%= order.order_price.balance_amount %></div>
           </td>
         </tr>
       <% end %>

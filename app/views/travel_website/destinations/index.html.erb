@@ -6,8 +6,12 @@
 
 </script>
 <% end %>
-<div id="dest_list-nav" style='margin-top:10px;margin-bottom:10px;'></div>
+<div class='content-block'>
+  <div style='position:relative;'>
+    <div id="dest_list-nav" style='margin-top:10px;margin-bottom:10px;'></div>
+  </div>
 <ul id="dest_list">
+
   <% @destinations.each do |d| %>
     <% if d.description %>
     <li>
@@ -22,3 +26,4 @@
   <% end %>
 </ul>
 <div class="clear"></div>
+</div>

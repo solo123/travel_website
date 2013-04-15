@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
       detail.bill_address = ui.addresses.first.to_s if ui.addresses.first
       detail.save
       @order.recaculate_price
-      redirect_to :action => :index
+      redirect_to @order
     end
   end
 

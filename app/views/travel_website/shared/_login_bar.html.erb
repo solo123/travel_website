@@ -1,5 +1,5 @@
 <% if current_user %>
-	Welcome <%= link_to current_user.email, myaccount_path %>,
+	Welcome <%= link_to current_user.email, myaccount_path if defined? myaccount_path %>,
 	&nbsp;
   |
   <%= link_to t(:logout), main_app.destroy_user_session_path, :method => :delete %>

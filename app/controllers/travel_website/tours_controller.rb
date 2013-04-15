@@ -36,7 +36,7 @@ class ToursController < ApplicationController
     else
       @tour = Tour.find(params[:id])
       @order = Order.new
-      @schedule = @tour.schedules.where(:departure_date => parse_date(params[:departure_date])).first
+      @schedule = @tour.schedules.where('DATE(departure_date)=?', parse_date(params[:departure_date])).first
     end
   end
   def parse_date(date_str)

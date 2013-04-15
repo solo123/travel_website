@@ -11,7 +11,9 @@ class PasswordsController < Devise::PasswordsController
         em = Email.where(:email_data_type => 'UserInfo').where(:email_address => a_email).first
         ui = em.email_data if em
         if ui
-          unless ui.user
+          if ui.user
+            
+          else
             u = User.new(:email => a_email)
             u.save
             ui.user = u

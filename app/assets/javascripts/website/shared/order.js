@@ -19,7 +19,7 @@ function add_room(){
       "<td>&nbsp;&nbsp;Amount:</td>" + 
       "<td class='amount'></td>" +
       "<td></td>" +
-      "<td>&nbsp;|&nbsp;<a href='javascript:remove_room(\""+ rid +"\");'>remove</a></td>" +
+      "<td>&nbsp;|&nbsp;<a href='javascript:remove_room(\""+ rid +"\");' class='button green small'>remove</a></td>" +
     "</tr>";
     $('#room_table').append(row);
     recaculate_price();
