@@ -39,7 +39,7 @@
             </p>
           </td>
           <td class='tour-price'>
-            <div class='price'><%= order.order_price.actual_amount %> (<%= order.status %>)</div>
+            <div class='price'><%= order.order_price.actual_amount %> (status: <%= type_text.get_text('order.status', order.status) %>)</div>
             <div class='op'>
               <% if order.status == 0 %>
                 <%= link_to 'Pay', payment_order_path(order), :class => 'button orange small' %> |
@@ -52,7 +52,7 @@
             <% if order.status == 1 %>
               Pay by credit card:<br />
               <% PayCreditCard.where(:order_id => order.id).where(:status => 0).each do |pcc| %>
-                <%= pcc.card_type %> <%= link_to pcc.card_number, pay_credit_card_path(pcc) %><br />
+                <%= pcc.card_type %> <%= link_to credit_card_number(pcc.card_number), pay_credit_card_path(pcc) %><br />
               <% end %>
             <% end %>
             <div class='notes'>Balance: <%= order.order_price.balance_amount %></div>

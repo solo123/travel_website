@@ -43,3 +43,11 @@ function new_order(){
     .dialog('open');
 */
 }
+function submit_order(btn){
+  if(check_user_login())
+    $(btn).closest('form').submit();
+  else {
+    alert('Please Sign in before order');
+    show_signin();
+  }
+}

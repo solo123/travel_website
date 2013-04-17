@@ -3,9 +3,8 @@
   <head>
 		<title><%= title %></title>
 		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />  	
-	  <%= stylesheet_link_tag    "website/all", :media => "all" %>
+	  <%= stylesheet_link_tag    "website/all", "/css/jqueryui/ui", :media => "all" %>
   	<%= javascript_include_tag "website/all" %>
-    <link rel="stylesheet" href="/css/jqueryui/ui.css" type="text/css" media="screen, projection">
   	<%= csrf_meta_tags %>
 	  <%= yield :head %>
   </head>
@@ -21,9 +20,7 @@
             <%= image_tag 'logo_w.png', :alt => ''  %>
           </a>
         </div>
-        <div class='login-status'>
-          <%= render 'travel_website/shared/login_bar' %>
-        </div>
+        <%= render 'travel_website/shared/login_bar' %>
       </div>
     </div>
 

@@ -13,6 +13,9 @@ module TravelWebsite
     def cfg
       AppConfig.instance
     end
+    def type_text
+      TypeText.instance
+    end
     def title
     end
     def add_object_js_link(name, form, method, partial, where)
@@ -49,6 +52,13 @@ var html = $("#{generate_template(form, method, :partial => partial)}".replace(/
         end
       end
       title
+    end
+    def credit_card_number(number)
+      if number.length > 8
+        [number.first(4), 'X' * (number.length - 8), number.last(4)].join('-')
+      else
+        number
+      end
     end
   end
 end

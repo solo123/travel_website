@@ -53,10 +53,10 @@ $(function(){
       <p>Price: <b>$<%= @tour.tour_price.price_adult %></b></p>
     <% end %>
     <br />
-    <%= form_tag order_tour_path(@tour), :method => :post, :remote => true do %>
+    <%= form_tag order_tour_path(@tour), :method => :post, :remote => true, :before => 'check_user_login();'  do %>
       <%= hidden_field_tag :tour_id, @tour.id %>
       <%= hidden_field_tag :departure_date %>
-      <%= submit_tag 'Order Now ▼', :class => 'button green' %>
+      <button class="button green" name="button" type="button" onclick='submit_order(this)'>Order Now ▼</button>
     <% end %>
   </div>
   <div class="clear"></div>

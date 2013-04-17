@@ -3,11 +3,11 @@
 <table>
   <tr>
     <td>Card Number:</td>
-    <td><%= @object.card_number %></td>
+    <td><%= credit_card_number(@object.card_number) %></td>
   </tr>
   <tr>
     <td>Card Type:</td>
-    <td><%= @object.card_type %></td>
+    <td><%= @object.card_type.upcase %></td>
   </tr>
   <tr>
     <td>Expiry date:</td>
