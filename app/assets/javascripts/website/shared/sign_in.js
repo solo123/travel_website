@@ -27,3 +27,14 @@ function close_signin(){
 function check_user_login(){
   return $('#sign_in_popup').length == 0;
 }
+
+function signin_email_keydown(event){
+  var keycode = (event.keyCode ? event.keyCode : event.which);
+  if (keycode == '13')
+    $('#signin_psw').select().focus();
+}
+function signin_psw_keydown(event){
+  var keycode = (event.keyCode ? event.keyCode : event.which);
+  if (keycode == '13')
+    $('#btn_signin').click();
+}

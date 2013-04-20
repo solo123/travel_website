@@ -23,14 +23,14 @@
         </div>
         <table>
           <tr>
-            <td>Email: </td><td><input type='text' id='signin_email' /></td>
+            <td>Email: </td><td><input type='text' id='signin_email' onkeydown='signin_email_keydown(event)'  /></td>
           </tr>
           <tr>
-            <td>Password: </td><td><input type='password' id='signin_psw' /></td>
+            <td>Password: </td><td><input type='password' id='signin_psw' onkeydown='signin_psw_keydown(event)' /></td>
           </tr>
         </table>
         <p style='margin-top: 4px;'>
-          <input type='button' value='Sign in' onclick='sign_in();' />
+          <input type='button' value='Sign in' onclick='sign_in();' id='btn_signin' />
           <input type='button' value='Cancel' onclick="close_signin();" />
         </p>
         <p style='margin-top:4px;'>
