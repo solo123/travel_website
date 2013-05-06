@@ -1,5 +1,5 @@
 <div>
-  Full Name: <%= best_in_place @user_info, :full_name %>
+  <b>Name: </b><%= best_in_place @user_info, :full_name %>
 </div>
 <div class='my-orders'>
   <b><%= link_to "My Orders", orders_path %></b>
@@ -21,7 +21,7 @@
 <br />
 <div id='list_telephones'>
   <div>
-    <b>Telephones:</b>&nbsp;<%= link_to 'Add', new_telephone_path, :remote => true %>
+    <b>Telephones:</b>&nbsp;<%= small_link 'Add', new_telephone_path, :remote => true, :icon => 'gicon-0-19' %>
   </div>
   <% @user_info.telephones.each do |tel| %>
     <%= render :partial => 'travel_website/telephones/row', :object => tel %>
@@ -30,7 +30,7 @@
 <br />
 <div id='list_emails'>
   <div>
-    <b>Emails:</b>&nbsp;<%= link_to 'Add', new_email_path, :remote => true %>
+    <b>Emails:</b>&nbsp;<%= small_link 'Add', new_email_path, :remote => true, :icon => 'gicon-0-19' %>
   </div>
   <% @user_info.emails.each do |email| %>
     <%= render :partial => 'travel_website/emails/row', :object => email %>
@@ -39,7 +39,7 @@
 <br />
 <div id='list_addresses'>
   <div>
-    <b>Addresses:</b>&nbsp;<%= link_to 'Add', new_address_path, :remote => true %>
+    <b>Addresses:</b>&nbsp;<%= small_link 'Add', new_address_path, :remote => true, :icon => 'gicon-0-19' %>
   </div>
   <% @user_info.addresses.each do |addr| %>
     <%= render :partial => 'travel_website/addresses/row', :object => addr %>

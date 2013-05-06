@@ -60,5 +60,23 @@ var html = $("#{generate_template(form, method, :partial => partial)}".replace(/
         number
       end
     end
+    def small_link(label_text, to_url, options = {})
+      icon = options[:icon]
+      options.delete(:icon)
+      lb = label_text
+      lb = "<i class='#{icon}'></i> " + label_text if icon
+      unless options[:class]
+        options[:class] = 'small-link'
+      end
+      if options[:class] && options[:class].include?('disabled')
+        options.delete(:onclick)
+        options.delete(:remote)
+        options.delete(:method)
+        options.delete(:confirm)
+        link_to(raw(lb), '#', options)
+      else
+        link_to( raw(lb), to_url, options)
+      end
+    end
   end
 end

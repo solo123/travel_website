@@ -35,7 +35,8 @@ class OrdersController < ApplicationController
       detail.email = ui.emails.first.email_address if ui.emails.first
       detail.bill_address = ui.addresses.first.to_s if ui.addresses.first
       detail.save
-      @order.recaculate_price
+      biz = Biz::OrderPayment.new
+      biz.caculate_price(@order)
       redirect_to @order
     end
   end

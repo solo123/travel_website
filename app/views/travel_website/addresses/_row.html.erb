@@ -2,5 +2,5 @@
   <div><%= best_in_place row, :address1 %></div>
   <span style='display:inline-block;width:160px;'<%= best_in_place row, :address2 %></span>
   ZIP: <span style='display:inline-block;width:160px;'<%= best_in_place row, :zipcode %></span>
-  <%= link_to 'Del', email_path(row), :method => :delete, :confirm => 'r u sure?', :remote => true%>
+  <%= small_link 'Del', address_path(row), :method => :delete, :confirm => 'Are you sure to delete this address?', :remote => true, :icon => 'gicon-7-20'%>
 </div>

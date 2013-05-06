@@ -1,5 +1,5 @@
 <div id='<%= dom_id row %>'>
   <span style='display:inline-block;width:60px;'><%= best_in_place row, :tel_type, :type => :select, :collection => InputType.where(:type_name => 'tel').map{|c| [c.type_text, c.type_text]} %></span>
   <span style='display:inline-block;width:160px;'><%= best_in_place row, :tel %></span>
-  <%= link_to 'Del', telephone_path(row), :method => :delete, :confirm => 'r u sure?', :remote => true%>
+  <%= small_link 'Del', telephone_path(row), :method => :delete, :confirm => 'Are you sure to delete this phone number?', :remote => true, :icon => 'gicon-7-20' %>
 </div>
