@@ -28,6 +28,10 @@ class OrdersController < ApplicationController
         item.save
       end
       ui = current_user.user_info
+      unless ui
+        ui = current_user.build_user_info
+        ui.save
+      end
       detail = @order.build_order_detail
       detail.user_info_id = ui.id
       detail.full_name = ui.full_name
