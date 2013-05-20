@@ -8,11 +8,17 @@ class PayCreditCardsController < ApplicationController
     else
       cc.order = order
       cc.user_info = current_user.user_info
+      tel = cc.build_telephone
+      tel.tel = params[:tel]
+      ad = cc.build_address
+      ad.assign_attributes(params[:address])
       if cc.save
         if order.status == 0
           order.status = 1
           order.save
         end
+
+
       else
         flash[:error] = 'Save credit card info error:' + cc.errors.all_messages.to_sentence
       end
@@ -21,10 +27,13 @@ class PayCreditCardsController < ApplicationController
   end
   def show
     @object = PayCreditCard.find(params[:id])
+    unless current_user && @object.user_info == current_user.user_info
+      raise ActionController::RoutingError.new('Not Found')
+    end
   end
   def destroy
     @object = PayCreditCard.find(params[:id])
-    if @object.status == 0
+    if @object.status == 0 && current_user && @object.user_info == current_user.user_info
       @object.status = 7
       @object.save
       order = @object.order

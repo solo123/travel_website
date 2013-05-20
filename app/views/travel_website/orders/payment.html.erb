@@ -3,17 +3,15 @@
     var credit_card_rate = "<%= @credit_card_rate %>";
   <% end %>
 <% end %>
-<%= form_for( @object, :html =>{:class => 'credit-card'} ) do |f| %>
+<%= form_for( @object, :html =>{:class => 'credit-card', :onsubmit => 'return validate_cc_payment(this);'} ) do |f| %>
   <%= hidden_field_tag :order_id, params[:id] %>
   <h2>Payment details</h2>
   <ul>
     <li>
       <ul class="cards">
         <li class="visa off">Visa</li>
-        <li class="visa_electron off">Visa Electron</li>
         <li class="mastercard off">MasterCard</li>
-        <li class="maestro off">Maestro</li>
-        <li class="discover">Discover</li>
+        <li class="amex off">Maestro</li>
       </ul>
     </li>
 
@@ -35,25 +33,33 @@
         </li>
       </ul>
     </li>
-
-    <li class="vertical maestro" style="display: none; opacity: 0;">
+    <li>
+      <label for="full_name">Name on card</label>
+      <%= f.text_field :full_name, :class => 'full-width' %>
+    </li>
+    <li>
+      <label for="name_on_card">Tel</label>
+      <%= text_field_tag :tel, '', :class => 'full-width' %>
+    </li>
+    <li>
+      <label for="address">Billing address</label>
+      <%= text_field_tag 'address[address1]', '', :class => 'full-width' %>
+    </li>
+    <li class='vertical'>
       <ul>
-        <li class='expiry-date'>
-          <label for="issue_date">Issue date <small>mm/yy</small></label>
-          <input type="text" name="issue_date" id="issue_date" maxlength="5">
-        </li>
-
         <li>
-          <span class="or">or</span>
-          <label for="issue_number">Issue number</label>
-          <input type="text" name="issue_number" id="issue_number" maxlength="2">
+          State
+          <%= text_field_tag 'address[state]', '' %>
+        </li>
+        <li>
+          Country
+          <%= text_field_tag 'address[country]', '' %>
+        </li>
+        <li>
+          ZIP Code
+          <%= text_field_tag 'address[zipcode]', '' %>
         </li>
       </ul>
-    </li>
-
-    <li>
-      <label for="name_on_card">Name on card</label>
-      <%= f.text_field :full_name, :class => 'full-width' %>
     </li>
 
     <li class='vertical'>
