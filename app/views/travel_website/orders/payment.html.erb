@@ -3,6 +3,12 @@
     var credit_card_rate = "<%= @credit_card_rate %>";
   <% end %>
 <% end %>
+<%
+  ui = current_user.user_info
+  tel = ui.telephones.first
+  default_tel = ''
+  default_tel = tel.tel if tel
+%>
 <%= form_for( @object, :html =>{:class => 'credit-card', :onsubmit => 'return validate_cc_payment(this);'} ) do |f| %>
   <%= hidden_field_tag :order_id, params[:id] %>
   <h2>Payment details</h2>
@@ -39,7 +45,7 @@
     </li>
     <li>
       <label for="name_on_card">Tel</label>
-      <%= text_field_tag :tel, '', :class => 'full-width' %>
+      <%= text_field_tag :tel, default_tel, :class => 'full-width' %>
     </li>
     <li>
       <label for="address">Billing address</label>

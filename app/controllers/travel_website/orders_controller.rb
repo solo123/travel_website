@@ -30,6 +30,8 @@ class OrdersController < ApplicationController
       ui = current_user.user_info
       unless ui
         ui = current_user.build_user_info
+        em = ui.emails.build
+        em.email_address = current_user.email
         ui.save
       end
       detail = @order.build_order_detail
@@ -50,8 +52,9 @@ class OrdersController < ApplicationController
     raise ActionController::RoutingError.new('Not Found') unless @object.order_detail.user_info_id == current_user.user_info.id
   end
   def payment
+    ui = current_user.user_info
     @object = PayCreditCard.new
-    @object.full_name = current_user.user_info.full_name
+    @object.full_name = ui.full_name
     order = Order.find(params[:id])
     @object.amount = order.order_price.actual_amount
     @credit_card_rate = InputType.where(:type_name => 'credit.card.rate').collect{|ipt| [ipt.type_text, ipt.type_value]}.join('|') + '|'
