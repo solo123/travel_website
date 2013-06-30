@@ -41,6 +41,10 @@
     </div>
   <% end %>
 
-  <%= link_to( t('.lang'), "javascript:change_language('#{locale}');", :class => 'lang') %>
+  <% if ENV["LANG_MODE"] == 'session' %>
+    <%= link_to t('.lang'), '/home/zh', :class => 'lang' %>
+  <% else %>
+    <%= link_to( t('.lang'), "javascript:change_language('#{locale}');", :class => 'lang') %>
+  <% end %>
 </div>
 

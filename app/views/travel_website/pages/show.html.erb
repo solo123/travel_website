@@ -1,6 +1,11 @@
-<div>
-  <% if @page && @page.status == 1 %>
-  <%= raw @page.description.en if @page.description %>
+<div class='cms-zone' style='background-color:#f6f6f6;padding:12px 24px;'>
+  <% if @page && @page.status == 1 
+  lang = I18n.locale.to_s == 'zh' ? 'cn' : 'en'
+%>
+  <% @page.photos.each do |p| %>
+    <%= image_tag p.pic.url(:small) %>
+  <% end %>
+  <%= raw @page.description[lang] if @page.description %>
   <% else %>
   [] not found.
   <% end %>

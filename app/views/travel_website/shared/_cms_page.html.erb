@@ -4,10 +4,11 @@
 		cms.permalink = cms_title
 		cms.save
 	end
+  lang = I18n.locale.to_s == 'zh' ? 'cn' : 'en'
 -%>
 <% if cms.status > 0 %>
 <% if cms.title && cms.title.length > 2 %>
 <h2><%= cms.title %></h2>
 <% end %>
-<%= raw  cms.description.en if cms.description %>
+<%= raw  cms.description[lang] if cms.description %>
 <% end %>

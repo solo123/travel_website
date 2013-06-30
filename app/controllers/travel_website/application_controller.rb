@@ -20,7 +20,11 @@ class ApplicationController < ActionController::Base
 	  I18n.locale = extract_locale_from_tld || I18n.default_locale
 	end
 	def extract_locale_from_tld
-	  parsed_locale = request.host.split('.').first
+    if Rails.env.development? && session[:current_local] && session[:current_local] == 'zh'
+      parsed_locale = 'zh'
+    else
+  	  parsed_locale = request.host.split('.').first
+    end
 	  I18n.available_locales.include?(parsed_locale.to_sym) ? parsed_locale  : nil
 	end
   def after_sign_in_path_for(resource)
