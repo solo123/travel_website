@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   # can be used in views as well as controllers.
   # e.g. <% title = 'This is a custom title for this view' %>
   attr_writer :title
+  attr_reader :cfg
 
   def cfg
     AppConfig.instance

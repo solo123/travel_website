@@ -50,7 +50,17 @@ $(function(){
     Departure Date<br />
     <div id='departure'></div>
     <% if @tour.tour_price %>
-      <p>Price: <b>$<%= @tour.tour_price.price_adult %></b></p>
+      <p>
+        Price: 
+        <b>$<%= @tour.tour_price.price_adult %></b>
+        <% if @tour.tour_price.buy_two_get_one_free %>
+          <% if @tour.tour_price.forth_charge == 0 %>
+            (Buy 2 Get 2 Free)
+          <% else %>
+            (Buy 2 Get 1 Free)
+          <% end %>
+        <% end %>
+      </p>
     <% end %>
     <br />
     <%= form_tag order_tour_path(@tour), :method => :post, :remote => true, :before => 'check_user_login();'  do %>
