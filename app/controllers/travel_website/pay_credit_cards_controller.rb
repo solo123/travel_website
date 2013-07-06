@@ -8,8 +8,9 @@ class PayCreditCardsController < ApplicationController
     else
       cc.order = order
       cc.user_info = current_user.user_info
-      tel = cc.build_telephone
-      tel.tel = params[:tel]
+      cc.user_info.payment_tel = params[:tel]
+      cc.user_info.payment_name = cc.full_name
+      cc.user_info.save
       ad = cc.build_address
       ad.assign_attributes(params[:address])
       if cc.save
@@ -17,8 +18,6 @@ class PayCreditCardsController < ApplicationController
           order.status = 1
           order.save
         end
-
-
       else
         flash[:error] = 'Save credit card info error:' + cc.errors.all_messages.to_sentence
       end
