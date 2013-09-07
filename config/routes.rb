@@ -1,7 +1,7 @@
 TravelWebsite::Engine.routes.draw do
   root :to => 'home#index'
   
-  match 'home(/:action)' => 'home'
+  #match 'home(/:action)' => 'home'
   resource :account
   resource :myaccount
   resources :telephones, :emails, :addresses
@@ -11,13 +11,13 @@ TravelWebsite::Engine.routes.draw do
       get 'order'
       post 'order'
     end
-    match 'order' => 'orders#new', :via => :get
-    match 'order' => 'orders#edit', :via => :post
-    match 'prices' => 'orders#prices'
+    #match 'order' => 'orders#new', :via => :get
+    #match 'order' => 'orders#edit', :via => :post
+    #match 'prices' => 'orders#prices'
   end
   resources :orders do
     get 'payment', :on => :member
   end
   resources :pay_credit_cards, :user_infos
-  match 'barcode/:str' => 'barcode#gen'
+  #match 'barcode/:str' => 'barcode#gen'
 end
