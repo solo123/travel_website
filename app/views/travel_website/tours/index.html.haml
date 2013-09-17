@@ -1,0 +1,24 @@
+- day = 0
+.tours.content-block
+  - @tours.each do |t|
+    - if t.days > day
+    - day = t.days
+    - tit = "days_tour"
+    - if day > 3
+    - tit = "more_days_tour"
+    - day = 10000
+    - end
+      .clear
+      %h2
+        \-- #{t tit, :count => day} --
+    .tour
+      .tour-icon
+        = image_tag t.title_photo.pic.url(:thumb) if t.title_photo
+      .tour-info
+        .tour-name
+          %a{:href => "/tours/#{t.id}"}
+            = tour_full_name(t)
+        .price
+          = t 'price'
+          $#{t.tour_price.price_adult if t.tour_price}
+  .clear

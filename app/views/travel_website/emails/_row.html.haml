@@ -1,0 +1,3 @@
+%div{:id => dom_id row}
+  %span{:style => "display:inline-block;width:160px;"}= best_in_place row, :email_address
+  = small_link 'Del', email_path(row), :method => :delete, :confirm => 'Are you sure to delete this email?', :remote => true, :icon => 'gicon-7-20'

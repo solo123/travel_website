@@ -1,0 +1,77 @@
+- content_for :head do
+  = javascript_tag do
+    var vds = '#{@datelist}';
+    $(function(){
+    $('#departure').datepicker({
+    numberOfMonths: 2,
+    showButtonPanel: false,
+    minDate: 0,
+    maxDate: #{@max_date},
+    onSelect: function(dateText, inst){
+    $('#departure_date').val(dateText);
+    },
+    beforeShowDay: function(date){
+    var s = date_to_string(date);
+    if (vds.indexOf(s)<0)
+    return [0, '', null];
+    else
+    return [1, '', s];
+    }
+    });
+    set_current_menu('menu_#{@tour.tour_type_menu_id}');
+    $('.dialog-normal').dialog({
+    autoOpen: false, show: "fade", hide: "blind",
+    width: 700, height: 300
+    });
+    });
+= content_for :breadcrumbs do
+  %ul
+    %li
+      %a{:href => "/"} Home
+    %li &raquo;
+    %li
+      %a{:href => "/tours"} Tours
+    %li &raquo;
+    %li= link_to @tour.tour_type_name, "/tours/#{@tour.tour_type_menu_id}"
+    %li &raquo;
+    %li= @tour.description.title
+.main_lightGreen
+  #tour_detail
+    .head
+      %h2= h @tour.description.local_title(locale)
+    = raw @tour.description.local_description(locale)
+  #order
+    Departure Date
+    %br/
+    #departure
+    - if @tour.tour_price
+      %p
+        Price:
+        %b
+          $#{@tour.tour_price.price_adult}
+        - if @tour.tour_price.buy_two_get_one_free == 1
+          - if @tour.tour_price.forth_charge == 0
+            (Buy 2 Get 2 Free)
+          - else
+            (Buy 2 Get 1 Free)
+    %br/
+    = form_tag order_tour_path(@tour), :method => :post, :remote => true, :before => 'check_user_login();'  do
+      = hidden_field_tag :tour_id, @tour.id
+      = hidden_field_tag :departure_date
+      %button.button.green{:name => "button", :onclick => "submit_order(this)", :type => "button"} Order Now
+  .clear
+  #tour_dests.content-block
+    - cd = 0
+    - image_path = ''
+    - @tour.spots.each do |spot|
+      - if (spot.visit_day != cd)
+        - cd = spot.visit_day
+        .day
+          Day #{cd}
+        .dest
+          - if spot.destination
+            .pic
+              = image_tag spot.destination.title_photo.pic(:small) if spot.destination.title_photo
+            .tour-info
+              = link_to spot.destination.description.local_title(locale), destination_path(spot.destination)
+              = raw spot.description.local_description(locale) if spot.description

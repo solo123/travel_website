@@ -1,0 +1,31 @@
+%h2 Credit Card Info
+%table
+  %tr
+    %td Card Number:
+    %td= credit_card_number(@object.card_number)
+  %tr
+    %td Card Type:
+    %td= @object.card_type.upcase
+  %tr
+    %td Expiry date:
+    %td= @object.valid_date
+  %tr
+    %td CVV:
+    %td= @object.csc
+  %tr
+    %td Amount:
+    %td= @object.amount
+  %tr
+    %td Service fee:
+    %td= @object.service_fee
+  %tr
+    %td Total amount:
+    %td= @object.total_amount
+  %tr
+    %td Created at:
+    %td= @object.created_at
+%br/
+%div
+  = link_to 'Back to Order', order_path(@object.order)
+  |
+  \#{link_to 'Cancel and re-input credit card info', pay_credit_card_path(@object), :method => :delete, :class => 'button green', :confirm => "Credit card incorrect? You can cancel this credit payment now and re-input. \n\nAre you sure to continue ?" if @object.status == 0}

@@ -1,0 +1,63 @@
+%h2 Order
+- order = @object
+%table.order-table.order
+  %tr.order-head
+    %td{:colspan => "4"}
+      Order#
+      %b= order.order_number
+      Created at: #{order.created_at}
+  - unless order.schedule && order.order_price
+    %td{:colspan => "4"} Invalid order
+  - else
+    %tr
+      %td.thumb= image_tag order.schedule.tour.title_photo.pic.url(:thumb) if order.schedule.tour.title_photo
+      %td.info-text
+        %h2= tour_full_name(order.schedule.tour)
+        Departure: #{label_tag order.schedule.departure_date}
+        Reture: #{label_tag order.schedule.return_date}
+        %p
+          %table
+            - order.order_items.each_with_index do |item, idx|
+              %tr
+                %td
+                  Room #{idx + 1}
+                %td{:align => "center"}
+                  = item.num_total
+                  PAX
+                %td{:align => "right"}
+                  amount: #{item.amount}
+            %tr.order-head
+              %td
+                %b Total
+              %td{:align => "center"}
+                = order.order_price.num_total
+                PAX (#{order.order_price.num_rooms} room)
+              %td{:align => "right"}= order.order_price.total_amount
+            %tr
+              %td{:colspan => "2"} Additional
+              %td{:align => "right"}= order.order_price.adjustment_amount
+            %tr.order-head
+              %td{:colspan => "2"} Actual amount:
+              %td{:align => "right"}= label_tag order.order_price.actual_amount
+      %td.tour-price
+        .price
+          = order.order_price.actual_amount
+          (status: #{type_text.get_text('order.status', order.status)})
+        .op
+          - if order.status == 0
+            = link_to 'Pay', payment_order_path(order), :class => 'button orange small'
+            |
+          - if order.status && order.status < 2
+            = link_to 'Cancel', order_path(order), :method => :delete, :confirm => "Order incorrect? You can cancel this order before the order confirmed.\n\nAre you sure to continue ?", :class => 'button green small'
+        %br/
+        - if order.status == 1
+          Pay by credit card:
+          %br/
+          - PayCreditCard.where(:order_id => order.id).where(:status => 0).each do |pcc|
+            = pcc.card_type
+            = link_to credit_card_number(pcc.card_number), pay_credit_card_path(pcc)
+            %br/
+        .notes
+          Balance: #{order.order_price.balance_amount}
+%p
+  = link_to 'All orders', orders_path

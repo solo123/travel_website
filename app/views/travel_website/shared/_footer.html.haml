@@ -1,0 +1,37 @@
+.site-nav-wrapper
+  %ul.footer.white-text
+    %li.col1 &nbsp;
+    %li
+      %a{:href => "/destinations"}= t 'Destination'
+    %li
+      %a{:href => "/tours"}= t 'Tours'
+    %li
+      %a{:href => "/pages/about-us"}= t 'About Us'
+  .clear
+.footer-wrapper
+  .footer{:style => "margin-top:10px;margin-bottom:10px;"}
+    %div{:style => "float:left; width:400px;"}
+      / siteseal
+      \&nbsp;
+    %div{:style => "float:left; width:400px; font-size: 11px;"}
+      = render 'travel_website/shared/cms_page', :cms_title => 'page.footer.address'
+    .clear
+.copyright-wrapper
+  .footer.white-text
+    %div{:style => "float:left; padding-top:10px; padding-bottom:10px;"}
+      %a{:href => "/"}
+        = image_tag 'logo.png', :height => '30', :alt => ''
+    %div{:style => "float:right;margin-top:25px;"}
+      = cfg.get_config(:copyright)
+      %a{:href => "/pages/terms"}= t(:terms_and_conditions)
+    %ul#color_schemas
+      %li.color1
+      %li.color2
+      %li.color3
+      %li.color4
+      %li.color5
+      %li.color6
+    .clear
+    = image_tag 'store/home/creditcard.gif'
+#footer
+= render 'travel_website/shared/google_analytics'

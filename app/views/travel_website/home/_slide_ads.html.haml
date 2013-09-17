@@ -1,0 +1,16 @@
+#slides
+  .slides_container
+    - if page = Page.find_by_permalink('page.home.advertising.photos')
+    - links = page.description.en.scan /<p>([^<>]*)<\/p>/
+    - idx = 0
+      - page.photos.each do |photo|
+      - txt = lnk = ''
+      - if idx < links.length - 1
+      - txt = links[idx][0]
+      - lnk = links[idx + 1][0]
+      - end
+      - idx += 2
+        %div
+          %a{:href => lnk}
+            = image_tag photo.pic.url(:large), :width => '400'
+          %h2= txt

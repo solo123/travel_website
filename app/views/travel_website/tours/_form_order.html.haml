@@ -1,0 +1,46 @@
+.order
+  %h2= @tour.description.title
+  - price = @tour.tour_price
+  %table.info-text
+    %tr
+      %td
+        %table{:style => "width:auto;"}
+          %tr
+            %td Departure:
+            %td= label_tag @schedule.departure_date
+          %tr
+            %td Return:
+            %td= label_tag @schedule.return_date
+      %td{:width => "10"} &nbsp;
+      %td
+        Price: #{label_tag price.price_adult}
+        %br/
+        - if price.buy_two_get_one_free == 1
+          (Single charge: #{label_tag @tour.tour_price.single_charge},
+          4th person charge: #{label_tag @tour.tour_price.forth_charge})
+  %hr/
+  = form_tag '/orders' do
+    %div{:style => "min-height:200px;"}
+      = hidden_field_tag :schedule_id, @schedule.id
+      %table#room_table
+        %thead
+          %tr
+            %th Room
+            %th Number of passengers
+            %th{:width => "100"} Amount
+            %th{:width => "100"}
+        %tbody
+          %tr
+            %td 1
+            %td= select_tag 'num_adult[]', '<option>1</option><option>2</option><option>3</option><option>4</option>'.html_safe, :onchange => 'recaculate_price()'
+            %td.amount
+            %td
+        %tfoot
+          %tr
+            %td= link_to 'add room', 'javascript:add_room();', :class => 'button green small'
+            %td{:align => "right"}
+              %b Total:
+            %td#total_amount
+            %td
+    %p
+      = submit_tag 'Submit Order'

@@ -1,0 +1,6 @@
+= form_for( @object, :remote => true) do |f|
+  .container
+    .span-2= f.select :tel_type, InputType.where(:type_name => 'tel').map { |c| [c.type_text, c.type_text] },  :class => 'data-field'
+    .span-4= f.telephone_field :tel
+  .actions
+    = f.submit

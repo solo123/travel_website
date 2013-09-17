@@ -1,0 +1,5 @@
+= form_for( @object, :remote => true) do |f|
+  .container
+    .span-4= f.email_field :email_address
+  .actions
+    = f.submit

@@ -1,0 +1,31 @@
+- content_for :head do
+  = javascript_include_tag '/css/galleria/galleria-1.2.8.min'
+  :javascript
+    $(function(){
+        Galleria.loadTheme('/css/galleria/themes/classic/galleria.classic.min.js');
+        Galleria.run('#gallery');
+    });
+  :css
+    #gallery{ width: 900px; height: 700px; }
+- content_for :breadcrumbs do
+  %ul
+    %li
+      %a{:href => "/home/index"} Home
+    %li &raquo;
+    %li
+      %a{:href => "/destinations"} Destinations
+    %li &raquo;
+    %li= @destination.description.title
+= render 'related_tours'
+%h2= @destination.description.local_title(locale)
+#photo_dest
+  #photo_primary{:style => "margin-right:16px;padding:3px;float:left;"}
+    = image_tag @destination.title_photo.pic.url(:small) if @destination.title_photo
+  %div{:style => "font-size:1em;line-height: 1.62;margin-bottom:12px;"}
+    = raw @destination.description.local_description(locale)
+  .clear
+%h2= t 'photo_gallery'
+#gallery
+  - @destination.photos.each do |p|
+    %a{:href => p.pic.url(:large)}
+      %img{"data-description" => "First image", "data-title" => "First", :src => p.pic.url(:thumb)}/

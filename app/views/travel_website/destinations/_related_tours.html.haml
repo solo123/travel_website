@@ -1,0 +1,4 @@
+%ul.related-tours
+  %h2= t 'related_tours'
+  - @related_tours.each do |tour|
+    %li= link_to tour_full_name(tour), tour_path(tour)

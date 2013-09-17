@@ -1,0 +1,7 @@
+%h2= t ('photo_gallery')
+%ul.hp-galleries.clearfix
+  - Ad.photos('page_gallery').each do |g|
+    %li
+      %a{:href => g.url}= image_tag g.image_url
+      .hp-gallery-title
+        %a{:href => g.url}= g.info

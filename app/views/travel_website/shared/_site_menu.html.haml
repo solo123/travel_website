@@ -1,0 +1,20 @@
+%ul.site-nav.clear
+  %li#menu_home{:class => "menu#{' current' if controller_name == 'home'}"}
+    %a{:href => "/"}= t('Home')
+  %li#menu_dest{:class => "menu#{' current' if controller_name == 'destinations'}"}
+    %a{:href => "/destinations"}= t 'Destination'
+  %li#menu_bus{:class => "menu#{' current' if controller_name == 'tours' && params[:id] == 'bus'}"}
+    %a{:href => "/tours/bus"}= t 'Bus Tour'
+  %li#menu_package{:class => "menu#{' current' if controller_name == 'tours' && params[:id] == 'package'}"}
+    %a{:href => "/tours/package"}= t 'Package'
+  %li#menu_cruise{:class => "menu#{' current' if controller_name == 'tours' && params[:id] == 'cruise'}"}
+    %a{:href => "/tours/cruise"}= t 'Cruise'
+  %li.menu
+    %a{:href => "/pages/airline-tickets"}= t 'Airline Ticket'
+  %li.menu
+    %a{:href => "/pages/hotel"}= t 'Hotel'
+  %li{:class => "menu#{' current' if controller_name == 'pages' && params[:id] == 'rent-bus'}"}
+    %a{:href => "/pages/rent-bus"}= t 'Rent Bus'
+  %li{:class => "last menu#{' current' if controller_name == 'pages' && params[:id] == 'about-us'}"}
+    %a{:href => "/pages/about-us"}= t 'About Us'
+  .clear

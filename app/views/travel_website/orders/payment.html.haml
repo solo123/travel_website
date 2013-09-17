@@ -1,0 +1,63 @@
+- content_for :head do
+  = javascript_tag do
+    var credit_card_rate = "#{@credit_card_rate}";
+- ui = current_user.user_info
+- tel = ui.telephones.first
+- default_tel = ''
+- default_tel = tel.tel if tel
+= form_for( @object, :html =>{:class => 'credit-card', :onsubmit => 'return validate_cc_payment(this);'} ) do |f|
+  = hidden_field_tag :order_id, params[:id]
+  %h2 Payment details
+  %ul
+    %li
+      %ul.cards
+        %li.visa.off Visa
+        %li.mastercard.off MasterCard
+        %li.amex.off Maestro
+    %li
+      %label{:for => "card_number"} Card number
+      = f.text_field :card_number, :class => 'full-width'
+    %li.vertical
+      %ul
+        %li.expiry-date
+          %label{:for => "expiry_date"}
+            Expiry date
+            %small mm/yy
+          = f.text_field :valid_date, :maxlength => '5'
+        %li
+          %label{:for => "cvv"} CVV
+          = f.text_field :csc, :maxlength => '4'
+    %li
+      %label{:for => "full_name"} Name on card
+      = f.text_field :full_name, :class => 'full-width'
+    %li
+      %label{:for => "tel"} Tel
+      = text_field_tag :tel, default_tel, :class => 'full-width'
+    %li
+      %label{:for => "address"} Billing address
+      = text_field_tag 'address[address1]', '', :class => 'full-width'
+    %li.vertical
+      %ul
+        %li
+          State
+          \#{text_field_tag 'address[state]', ''}
+        %li
+          Country
+          \#{text_field_tag 'address[country]', ''}
+        %li
+          ZIP Code
+          \#{text_field_tag 'address[zipcode]', ''}
+    %li.vertical
+      %ul
+        %li
+          Amount:
+          \#{f.text_field :amount, :readonly => 'readonly'}
+        %li
+          Service fee:
+          \#{f.text_field :service_fee, :readonly => 'readonly'}
+        %li
+          Total:
+          \#{f.text_field :total_amount, :readonly => 'readonly'}
+  = f.hidden_field :card_type
+  %p
+    = f.submit 'Pay by Credit Card', :id => 'pay_button', :disabled => 'disabled'

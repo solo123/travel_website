@@ -1,0 +1,35 @@
+#content
+  .block.clear
+    .col1
+      #ads.slide.light-block
+        = render 'slide_ads'
+    .col2.light-block{:style => "height:358px;"}
+      = render 'search'
+      .content-block
+        = render 'travel_website/shared/cms_page', :cms_title => 'page.home.connect'
+  .block.light-block.clear
+    .col1
+      = render 'hot_destinations'
+    .col2.color-block
+      = render 'picks'
+  .block.clear
+    .col1
+      .light-block.content-block.seperate-block
+        .ttod.hp-section.ttod-hp-module
+          = render 'travel_website/shared/cms_page', :cms_title => 'page.home.tip'
+      .light-block.content-block.seperate-block
+        = render 'news'
+    .col2
+      = render 'gallery'
+#sidebar
+  .content-block.light-block.ad-block.seperate-block
+    = render 'travel_website/shared/ad_home_side'
+  .content-block.light-block.ad-block.seperate-block
+    #otc_bottompromotext
+      = render 'travel_website/shared/cms_page', :cms_title => 'page.home.side1'
+  %div
+    .forums
+      = render 'travel_website/shared/cms_page', :cms_title => 'page.home.side2'
+  .content-block.light-block.seperate-block
+    = render 'travel_website/shared/cms_page', :cms_title => 'page.home.side3'
+.clear

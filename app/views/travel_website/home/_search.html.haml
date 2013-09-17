@@ -1,0 +1,6 @@
+.search-block
+  .content-block
+    %h2= t 'search_destination'
+    = form_tag do
+      = text_field_tag :search_text, '', :size => '10'
+      = submit_tag 'GO', :class => 'search-button'
