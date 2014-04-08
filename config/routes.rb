@@ -1,6 +1,4 @@
 TravelWebsite::Engine.routes.draw do
-  root :to => 'home#index'
-  
   #match 'home(/:action)' => 'home'
   resource :account
   resource :myaccount
