@@ -1,0 +1,14 @@
+.col-xs-12.col-sm-6.col-md-3.portfolio-item-wrapper.artwork.creative.isotope-item
+  .portfolio-item
+    .portfolio-thumb
+      - if tour.title_photo
+        %img.img-responsive{:alt => "#{tour_full_name(tour)}", :src => "#{$redis.get(:image_site_path)}/#{tour.title_photo.pic.url(:thumb)}"}
+          .image-overlay
+          %a.portfolio-zoom{:href => "assets/img/portfolio/photo (1).jpg", :rel => "prettyPhoto[pp_gal]"}
+            %i.fa.fa-eye
+          %a.portfolio-link{:href => "portfolio-item-1.html"}
+            %i.fa.fa-link
+    .portfolio-details
+      %p= tour_full_name(tour)
+      %h5 $#{tour.tour_price.price_adult if tour.tour_price}
+

@@ -24,7 +24,7 @@ class ToursController < ApplicationController
     @tour = Tour.find(params[:id])
     @datelist = []
     rsv_date = @tour.tour_setting.days_in_advance
-    rsv_date = cfg.get_config('max_reservation_days').to_i if rsv_date == 0
+    rsv_date = AppConfig.instance.get_config('max_reservation_days').to_i if rsv_date == 0
     @max_date = Date.today + rsv_date
     if @tour.schedules.count > 0
       @datelist = @tour.schedules.map {|s| s.departure_date.strftime('%Y.%m.%d')}.join(',')

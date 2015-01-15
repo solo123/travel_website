@@ -1,0 +1,16 @@
+- tours = Tour.bus_tours
+%h4 One Day Tours
+.row
+  #isotope-portfolio-container.isotope
+    - tours.where(days: 1).each do |tour|
+      = render partial: '/travel_website/shared/tours_item', locals: { tour: tour }
+%h4 2 Days Tours
+.row
+  #isotope-portfolio-container.isotope
+    - tours.where(days: 2).each do |tour|
+      = render partial: '/travel_website/shared/tours_item', locals: { tour: tour }
+%h4 3 or more Days Tours
+.row
+  #isotope-portfolio-container.isotope
+    - tours.where('days>2').each do |tour|
+      = render partial: '/travel_website/shared/tours_item', locals: { tour: tour }

@@ -2,18 +2,17 @@
 .tours.content-block
   - @tours.each do |t|
     - if t.days > day
-    - day = t.days
-    - tit = "days_tour"
-    - if day > 3
-    - tit = "more_days_tour"
-    - day = 10000
-    - end
+      - day = t.days
+      - tit = "days_tour"
+      - if day > 3
+        - tit = "more_days_tour"
+        - day = 10000
       .clear
       %h2
         \-- #{t tit, :count => day} --
     .tour
       .tour-icon
-        = image_tag t.title_photo.pic.url(:thumb) if t.title_photo
+        = image_tag $redis.get(:image_site_path) + t.title_photo.pic.url(:thumb) if t.title_photo
       .tour-info
         .tour-name
           %a{:href => "/tours/#{t.id}"}

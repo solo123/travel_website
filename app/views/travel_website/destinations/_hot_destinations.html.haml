@@ -1,0 +1,8 @@
+.content-block
+  %h2= t 'hot_destinations'
+  %ul.list-108
+    - Destination.order('updated_at desc').limit(28).each do |d|
+      - if d.description
+        %li= link_to d.description.local_title(locale), "/destinations/#{d.id}", :title => d.description.title
+    .clear
+

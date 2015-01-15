@@ -1,0 +1,4 @@
+.row
+  #isotope-portfolio-container.isotope
+    - Tour.cruises.where(days: 1).each do |tour|
+      = render partial: '/travel_website/shared/tours_item', locals: { tour: tour }
