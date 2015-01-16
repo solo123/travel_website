@@ -3,16 +3,16 @@ TravelWebsite::Engine.routes.draw do
   resource :account
   resource :myaccount
   resources :telephones, :emails, :addresses
-  resources :destinations, :pages, :tour_orders
-  resources :tours do
-    member do
-      get 'order'
-      post 'order'
-    end
+  resources :pages, :tour_orders
+  #resources :tours do
+  #  member do
+  #    get 'order'
+  #    post 'order'
+  #  end
     #match 'order' => 'orders#new', :via => :get
     #match 'order' => 'orders#edit', :via => :post
     #match 'prices' => 'orders#prices'
-  end
+  #end
   resources :orders do
     get 'payment', :on => :member
   end

@@ -1,7 +1,8 @@
-- Destination.where(status: 1).limit(20).each do |d|
-  .portfolio-item
-    .portfolio-thumb
-      - if d.title_photo
-        %img{src: "#{$redis.get(:image_site_path)}/#{d.title_photo.pic.url(:thumb)}"}
-      = link_to d.description.title, "/dest/#{d.id}"
+%ul
+  - Destination.where(status: 1).each do |d|
+    .portfolio-item
+      .portfolio-thumb
+        - if d.title_photo
+          %img{src: "#{$redis.get(:image_site_path)}/#{d.title_photo.pic.url(:thumb)}"}
+        = link_to d.description.title, "/dest/#{d.id}"
 
